@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# script to auto-create a book for NaNoWriMo
+# script to auto-create a novel for NaNoWriMo
 
 tmp=/tmp/noveltmp
 dest=$HOME/Desktop/novel.txt
@@ -25,6 +25,7 @@ fi
 i=`cat $tmp |wc -l`
 done
 
+echo "the end." >> $tmp
 tr '\n' ' ' < $tmp > $dest
 
 exit 0
