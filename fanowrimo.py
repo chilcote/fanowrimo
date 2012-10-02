@@ -17,12 +17,12 @@ toc = "Table of Contents"
 the_end = "THE END"
 remainder = 50000 - len(byline.split(" ")) - len(toc.split(" ")) - len(the_end.split(" "))
 
-def title_gen(wordcount):
-	"""Generates a string of given length (wordcount), using Title Case."""
-	title = random.choice(words).title().strip()
+def phrase_gen(wordcount):
+	"""Generates a string of given length (wordcount)."""
+	phrase = random.choice(words).strip()
 	for i in range(1, wordcount):
-		title = title + " " + random.choice(words).title().strip()
-	return title.upper()
+		phrase = phrase + " " + random.choice(words).strip()
+	return phrase
 
 if exists(novel):
 	print "'%s' exists, shall we wipe it? (Y,n)" % novel
@@ -40,8 +40,8 @@ output = open(novel, 'w')
 print "Locating quill..."
 print "Furiously capturing stream of conciousness..."
 
-book_title = title_gen(3)
-output.write("###%s " % book_title)
+book_title = phrase_gen(3).upper()
+output.write("###%s\n" % book_title)
 output.write("\n%s\n" % byline)
 output.write("#####%s:\n" % toc)
 
@@ -49,7 +49,7 @@ remainder = remainder - len(book_title.split(" "))
 
 table_contents = []
 for i in range(1, random.randint(9, 13)):
-	table_contents.append(title_gen(random.randint(1, 6)))
+	table_contents.append(phrase_gen(random.randint(1, 6)).upper())
 
 remainder = remainder - len(table_contents)
 
