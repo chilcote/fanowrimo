@@ -1,16 +1,22 @@
 #!/usr/bin/env python
 
-""" fanowrimo.py
-	by Joseph Chilcote
-	chilcote@gmail.com
-	last modified: 2012-10-2 """
+# Version 1.0
+# Last modified 2012-10-2
+
+"""fanowrimo.py: "Fast Novel Writing Month."
+
+Generate a novel of exactly 50000 words, in accordance with National Novel Writing Month (nanowrimo.org).
+
+Output format is in Markdown. If (no or too many) arguments are given, this message will display.
+
+Example usage:
+./fanowrimo.py GreatAmericanNovel.md
+"""
 
 from sys import argv
 from sys import exit
 from os.path import exists
 import random
-
-script, novel = argv
 
 byline = "a novel by Ernst Hummingway"
 toc = "Table of Contents"
@@ -18,6 +24,10 @@ the_end = "THE END"
 epilogue_title = "EPILOGUE"
 
 remainder = 50000 - len(byline.split(" ")) - len(toc.split(" ")) - len(the_end.split(" ")) - len(epilogue_title.split(" "))
+
+def usage():
+	print __doc__
+	exit()
 
 def phrase_gen(wordcount):
 	"""Generates a string of given length (wordcount)."""
@@ -66,6 +76,11 @@ def epilogue_gen(wordcount):
 		epilogue.append("%s" % phrase_gen(i).capitalize())
 
 	return epilogue
+
+try:
+	script, novel = argv
+except ValueError:
+	usage()
 
 if exists(novel):
 	print "'%s' exists, shall we wipe it? (Y,n)" % novel
@@ -119,5 +134,4 @@ print "Sending to publisher..."
 
 output.close()
 
-print "Congratulations! Your new masterpiece, %s,\nhas been listed atop the New York Times best sellers list." % book_title
-exit(0)
+print "Congratulations! Your new masterpiece, %s,\nhas been listed atop the New York Times best sellers list!" % book_title
